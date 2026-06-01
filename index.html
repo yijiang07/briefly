@@ -675,7 +675,8 @@ async function suSubmit() {
         email: state.user.email,
         topics: [...state.suTopics].join(', '),
         custom_tracking: state.suCustom.join(', '),
-        frequency: state.suFreq || 'daily'
+        frequency: state.suFreq || 'daily',
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/New_York'
       })
     });
   } catch (err) {

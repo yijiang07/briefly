@@ -1,0 +1,16 @@
+{
+  "name": "briefly",
+  "version": "1.0.0",
+  "description": "All Signal, No Scroll — Your personalized morning news brief",
+  "private": true,
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Static HTML project - no build needed'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/analytics": "^1.1.1"
+  }
+}

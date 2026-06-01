@@ -696,6 +696,20 @@ async function suSubmit() {
     console.error('Signup save failed:', err);
   }
 
+  // Send welcome email immediately via Vercel function
+  try {
+    await fetch('/api/welcome', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: state.user.email,
+        topics: [...state.suTopics].join(', '),
+      }),
+    });
+  } catch (err) {
+    console.error('Welcome email failed:', err);
+  }
+
   document.getElementById('ss3').classList.remove('visible');
   document.getElementById('signup-dots').style.display = 'none';
   document.getElementById('su-success').classList.add('visible');

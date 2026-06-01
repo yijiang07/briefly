@@ -4,6 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Briefly — All Signal, No Scroll</title>
+  <meta name="description" content="Your personalized morning news brief. 5 stories, why they matter, delivered to your inbox by 7am. Free forever.">
+  <meta property="og:title" content="Briefly — All Signal, No Scroll">
+  <meta property="og:description" content="Your personalized morning news brief. 5 stories, why they matter, delivered to your inbox by 7am. Free forever.">
+  <meta property="og:url" content="https://www.readbriefly.com">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Briefly — All Signal, No Scroll">
+  <meta name="twitter:description" content="Your personalized morning news brief. 5 stories, why they matter, in your inbox by 7am.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -269,14 +277,14 @@
     <h1>All signal.<br><em>No scroll.</em></h1>
     <p class="hero-sub">Tell Briefly what you care about. Every morning, get 5 stories that matter — ranked by relevance to you, with a plain-English "why it matters" for each one. No noise. No doomscrolling.</p>
     <div class="hero-actions">
-      <button class="btn-accent" onclick="showPage('signup')">Start your free briefing →</button>
+      <button class="btn-accent" onclick="showPage('signup')">Get my free brief →</button>
       <span class="hero-note">Free · Takes 2 minutes · No credit card</span>
     </div>
   </section>
 
   <div class="proof-bar">
     <div class="proof-item"><div class="proof-num">5 min</div><div class="proof-lbl">average read time</div></div>
-    <div class="proof-item"><div class="proof-num">50+</div><div class="proof-lbl">sources scanned daily</div></div>
+    <div class="proof-item"><div class="proof-num">80+</div><div class="proof-lbl">sources scanned daily</div></div>
     <div class="proof-item"><div class="proof-num">Zero</div><div class="proof-lbl">algorithmic rabbit holes</div></div>
     <div class="proof-item"><div class="proof-num">Daily</div><div class="proof-lbl">briefing in your inbox</div></div>
   </div>
@@ -285,8 +293,8 @@
     <div class="section-label"><span class="eyebrow-line"></span> How it works</div>
     <div class="steps">
       <div class="step"><div class="step-n">01</div><div class="step-title">You define your world</div><div class="step-desc">Pick topics, add specific companies, people, or keywords. Change them any time from your dashboard.</div></div>
-      <div class="step"><div class="step-n">02</div><div class="step-title">We scan and filter</div><div class="step-desc">Briefly scans 50+ trusted sources every day, removes duplicates, and ranks what actually matters — not what's trending.</div></div>
-      <div class="step"><div class="step-n">03</div><div class="step-title">You get the brief</div><div class="step-desc">A concise daily email with source comparisons and a plain-English "why this matters" for each story.</div></div>
+      <div class="step"><div class="step-n">02</div><div class="step-title">We scan and filter</div><div class="step-desc">Briefly scans 80+ trusted sources every day, removes duplicates, and ranks what actually matters — not what's trending.</div></div>
+      <div class="step"><div class="step-n">03</div><div class="step-title">You get the brief</div><div class="step-desc">A concise daily email with an AI-written overview and a plain-English "why this matters" for each story.</div></div>
       <div class="step"><div class="step-n">04</div><div class="step-title">It gets smarter</div><div class="step-desc">One-tap feedback on any story teaches Briefly your preferences. Your briefing sharpens over time.</div></div>
     </div>
   </section>
@@ -327,7 +335,11 @@
 
   <footer>
     <div class="footer-logo">Briefly</div>
-    <div>© 2026 Briefly · All signal, no scroll.</div>
+    <div style="display:flex;gap:20px;align-items:center;">
+      <a href="mailto:hello@readbriefly.com" style="color:var(--muted);text-decoration:none;">Contact</a>
+      <a href="#" onclick="showPage('signup');return false;" style="color:var(--muted);text-decoration:none;">Sign up free</a>
+    </div>
+    <div>© 2026 Briefly · readbriefly.com</div>
   </footer>
 </div>
 
@@ -803,12 +815,18 @@ function showSaved(id) {
 // ── SUBSCRIBER COUNT ──
 async function loadSubscriberCount() {
   try {
-    const res = await fetch(SUPABASE_URL + '/rest/v1/signups?select=email', {
-      headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY }
+    const res = await fetch(SUPABASE_URL + '/rest/v1/signups?select=email&unsubscribed=neq.true', {
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'Prefer': 'count=exact'
+      }
     });
+    const countHeader = res.headers.get('content-range');
     const data = await res.json();
     const el = document.getElementById('subscriber-count');
-    if (el && Array.isArray(data)) el.textContent = data.length > 0 ? data.length : '–';
+    const count = countHeader ? parseInt(countHeader.split('/')[1]) : (Array.isArray(data) ? data.length : 0);
+    if (el) el.textContent = count > 0 ? count : '–';
   } catch(e) {}
 }
 loadSubscriberCount();

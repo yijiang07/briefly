@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Daily Digest — Briefly</title>
+  <meta name="description" content="Today's top headlines across tech, AI, finance, science, and world news. Free daily digest by Briefly.">
+  <meta property="og:title" content="Daily Digest — Briefly">
+  <meta property="og:description" content="Today's top headlines across tech, AI, finance, science, and world news.">
+  <meta property="og:url" content="https://www.readbriefly.com/digest.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='18' cy='16' r='10' stroke='%23111' stroke-width='2.5' fill='none'/><ellipse cx='18' cy='16' rx='4.5' ry='10' stroke='%23111' stroke-width='2.5' fill='none'/><line x1='8' y1='16' x2='28' y2='16' stroke='%23111' stroke-width='2.5'/><path d='M9.5 10 Q18 6.5 26.5 10' stroke='%233657F5' stroke-width='2.8' fill='none' stroke-linecap='round'/><path d='M9.5 22 Q18 25.5 26.5 22' stroke='%233657F5' stroke-width='2.8' fill='none' stroke-linecap='round'/><line x1='2' y1='12' x2='7' y2='12' stroke='%233657F5' stroke-width='2.5' stroke-linecap='round'/><line x1='1' y1='16' x2='6' y2='16' stroke='%233657F5' stroke-width='2.5' stroke-linecap='round'/><line x1='2' y1='20' x2='7' y2='20' stroke='%233657F5' stroke-width='2.5' stroke-linecap='round'/></svg>">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #0f0e0c; --paper: #f5f2eb; --cream: #ede9df;
+      --accent: #2b4fff; --accent-light: #dce3ff; --muted: #7a7670;
+      --border: rgba(15,14,12,0.12);
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'DM Sans', sans-serif;
+    }
+    body { font-family: var(--sans); background: var(--paper); color: var(--ink); min-height: 100vh; }
+    nav { display:flex; align-items:center; justify-content:space-between; padding:20px 48px; border-bottom:1px solid var(--border); position:sticky; top:0; background:var(--paper); z-index:100; }
+    .nav-logo { font-family:var(--serif); font-size:21px; font-weight:400; display:flex; align-items:center; gap:7px; text-decoration:none; color:var(--ink); }
+    .logo-dot { width:7px; height:7px; border-radius:50%; background:var(--accent); flex-shrink:0; }
+    .nav-right { display:flex; align-items:center; gap:12px; }
+    .btn-ghost { background:none; border:1px solid var(--border); padding:8px 18px; border-radius:100px; font-family:var(--sans); font-size:13px; cursor:pointer; color:var(--ink); text-decoration:none; }
+    .btn-ghost:hover { background:var(--cream); }
+    .btn-solid { background:var(--ink); color:var(--paper); padding:8px 18px; border-radius:100px; font-family:var(--sans); font-size:13px; font-weight:500; border:none; cursor:pointer; text-decoration:none; }
+    .btn-solid:hover { opacity:0.78; }
+
+    .digest-header { max-width:860px; margin:0 auto; padding:64px 48px 40px; }
+    .digest-eyebrow { font-size:11px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); display:flex; align-items:center; gap:8px; margin-bottom:20px; }
+    .eyebrow-line { flex:0 0 26px; height:1px; background:var(--muted); }
+    .digest-header h1 { font-family:var(--serif); font-size:clamp(32px,5vw,52px); font-weight:400; line-height:1.1; margin-bottom:12px; }
+    .digest-date { font-size:14px; color:var(--muted); margin-bottom:0; }
+
+    .digest-body { max-width:860px; margin:0 auto; padding:0 48px 80px; }
+
+    .topic-section { margin-bottom:52px; }
+    .topic-label { font-size:11px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); display:flex; align-items:center; gap:10px; margin-bottom:20px; }
+    .topic-label-line { flex:1; height:1px; background:var(--border); }
+
+    .story-list { display:flex; flex-direction:column; gap:0; background:#fff; border-radius:16px; border:1px solid var(--border); overflow:hidden; }
+    .story-item { padding:18px 24px; border-bottom:1px solid var(--border); display:flex; flex-direction:column; gap:6px; transition:background .12s; }
+    .story-item:last-child { border-bottom:none; }
+    .story-item:hover { background:#fafaf8; }
+    .story-item a { text-decoration:none; color:inherit; }
+    .story-source { font-size:11px; font-weight:500; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); }
+    .story-headline { font-family:var(--serif); font-size:17px; font-weight:400; line-height:1.4; color:var(--ink); }
+    .story-headline:hover { color:var(--accent); }
+    .story-desc { font-size:13px; color:var(--muted); line-height:1.6; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+    .story-time { font-size:11px; color:var(--muted); margin-top:2px; }
+
+    .skeleton { animation: shimmer 1.4s infinite; }
+    .skeleton-line { height:16px; background:var(--cream); border-radius:4px; margin-bottom:8px; }
+    .skeleton-line.short { width:40%; }
+    .skeleton-line.med { width:75%; }
+    .skeleton-line.long { width:92%; }
+    @keyframes shimmer { 0%,100%{opacity:1} 50%{opacity:0.5} }
+
+    .cta-strip { background:var(--ink); border-radius:20px; padding:40px 48px; margin:0 48px 80px; max-width:860px; margin-left:auto; margin-right:auto; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+    .cta-strip-text h2 { font-family:var(--serif); font-size:26px; font-weight:400; color:#fff; margin-bottom:6px; }
+    .cta-strip-text p { font-size:14px; color:rgba(255,255,255,0.6); line-height:1.6; }
+    .btn-accent { background:var(--accent); color:#fff; padding:12px 26px; border-radius:100px; font-family:var(--sans); font-size:14px; font-weight:500; border:none; cursor:pointer; text-decoration:none; white-space:nowrap; display:inline-block; }
+    .btn-accent:hover { opacity:0.88; }
+
+    .error-msg { text-align:center; padding:40px; color:var(--muted); font-size:14px; }
+
+    footer { border-top:1px solid var(--border); padding:24px 48px; display:flex; align-items:center; justify-content:space-between; font-size:12px; color:var(--muted); flex-wrap:wrap; gap:12px; }
+    .footer-logo { font-family:var(--serif); font-size:16px; color:var(--ink); }
+    footer a { color:var(--muted); text-decoration:none; }
+    footer a:hover { color:var(--ink); }
+
+    @media (max-width:640px) {
+      nav { padding:16px 20px; }
+      .digest-header { padding:40px 20px 28px; }
+      .digest-body { padding:0 20px 60px; }
+      .cta-strip { margin:0 20px 60px; padding:28px 24px; }
+      footer { padding:20px; flex-direction:column; text-align:center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/"><span class="logo-dot"></span> Briefly</a>
+  <div class="nav-right">
+    <a class="btn-ghost" href="/">Log in</a>
+    <a class="btn-solid" href="/">Get started free</a>
+  </div>
+</nav>
+
+<div class="digest-header">
+  <div class="digest-eyebrow"><span class="eyebrow-line"></span> Free daily digest</div>
+  <h1>What's moving today</h1>
+  <div class="digest-date" id="digest-date">Loading today's headlines…</div>
+</div>
+
+<div class="digest-body" id="digest-body">
+  <!-- Skeleton loaders -->
+  <div class="topic-section">
+    <div class="topic-label">⚡ Loading<span class="topic-label-line"></span></div>
+    <div class="story-list">
+      <div class="story-item skeleton"><div class="skeleton-line short"></div><div class="skeleton-line long"></div><div class="skeleton-line med"></div></div>
+      <div class="story-item skeleton"><div class="skeleton-line short"></div><div class="skeleton-line long"></div><div class="skeleton-line med"></div></div>
+      <div class="story-item skeleton"><div class="skeleton-line short"></div><div class="skeleton-line med"></div><div class="skeleton-line long"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="cta-strip">
+  <div class="cta-strip-text">
+    <h2>Want this personalized?</h2>
+    <p>Sign up free and get a daily brief built around your topics — AI, startups, finance, or anything else you track.</p>
+  </div>
+  <a class="btn-accent" href="/">Get my free brief →</a>
+</div>
+
+<footer>
+  <div class="footer-logo">Briefly</div>
+  <div style="display:flex;gap:20px;">
+    <a href="mailto:hello@readbriefly.com">Contact</a>
+    <a href="/">Sign up free</a>
+  </div>
+  <div>© 2026 Briefly · readbriefly.com</div>
+</footer>
+
+<script>
+const TOPICS = [
+  { name: 'AI & Technology', icon: '⚡', feeds: [
+    'https://techcrunch.com/category/artificial-intelligence/feed/',
+    'https://www.theverge.com/rss/index.xml',
+    'https://arstechnica.com/feed/',
+  ]},
+  { name: 'Business & Finance', icon: '📈', feeds: [
+    'https://feeds.reuters.com/reuters/businessNews',
+    'https://www.cnbc.com/id/10000664/device/rss/rss.html',
+    'https://fortune.com/feed/',
+  ]},
+  { name: 'Startups & Venture', icon: '🚀', feeds: [
+    'https://techcrunch.com/category/startups/feed/',
+    'https://news.crunchbase.com/feed/',
+  ]},
+  { name: 'World News', icon: '🌍', feeds: [
+    'https://feeds.bbci.co.uk/news/world/rss.xml',
+    'https://feeds.reuters.com/Reuters/worldNews',
+  ]},
+  { name: 'Science & Health', icon: '🧬', feeds: [
+    'https://www.sciencedaily.com/rss/health_medicine.xml',
+    'https://www.statnews.com/feed/',
+  ]},
+  { name: 'Climate & Energy', icon: '🌱', feeds: [
+    'https://feeds.reuters.com/reuters/environment',
+    'https://insideclimatenews.org/feed/',
+  ]},
+];
+
+const RSS2JSON = 'https://api.rss2json.com/v1/api.json?rss_url=';
+const CUTOFF_HOURS = 48;
+
+function timeAgo(dateStr) {
+  const diff = (Date.now() - new Date(dateStr)) / 1000;
+  if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
+  if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
+  return Math.floor(diff / 86400) + 'd ago';
+}
+
+function isRecent(dateStr) {
+  return (Date.now() - new Date(dateStr)) < CUTOFF_HOURS * 3600 * 1000;
+}
+
+function stripHtml(str) {
+  return (str || '').replace(/<[^>]+>/g, '').replace(/&nbsp;/g,' ').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').trim();
+}
+
+async function fetchFeed(url) {
+  try {
+    const res = await fetch(RSS2JSON + encodeURIComponent(url) + '&count=8', { signal: AbortSignal.timeout(6000) });
+    const data = await res.json();
+    return (data.items || []).filter(item => item.pubDate && isRecent(item.pubDate));
+  } catch { return []; }
+}
+
+function getSourceName(url) {
+  try {
+    const host = new URL(url).hostname.replace('www.','').replace('feeds.','').replace('rss.','');
+    const map = {
+      'techcrunch.com': 'TechCrunch', 'theverge.com': 'The Verge',
+      'arstechnica.com': 'Ars Technica', 'reuters.com': 'Reuters',
+      'cnbc.com': 'CNBC', 'fortune.com': 'Fortune',
+      'crunchbase.com': 'Crunchbase', 'bbci.co.uk': 'BBC',
+      'bbc.co.uk': 'BBC', 'sciencedaily.com': 'Science Daily',
+      'statnews.com': 'STAT News', 'insideclimatenews.org': 'Inside Climate News',
+    };
+    return map[host] || host.split('.')[0].charAt(0).toUpperCase() + host.split('.')[0].slice(1);
+  } catch { return 'News'; }
+}
+
+function renderStory(item, feedUrl) {
+  const source = getSourceName(feedUrl);
+  const desc = stripHtml(item.description || item.content || '').slice(0, 180);
+  const ago = item.pubDate ? timeAgo(item.pubDate) : '';
+  return `<div class="story-item">
+    <div class="story-source">${source} · ${ago}</div>
+    <a href="${item.link}" target="_blank" rel="noopener">
+      <div class="story-headline">${stripHtml(item.title)}</div>
+    </a>
+    ${desc ? `<div class="story-desc">${desc}</div>` : ''}
+  </div>`;
+}
+
+function renderSkeleton() {
+  return `<div class="story-item skeleton">
+    <div class="skeleton-line short"></div>
+    <div class="skeleton-line long"></div>
+    <div class="skeleton-line med"></div>
+  </div>`;
+}
+
+async function loadDigest() {
+  // Set date
+  const now = new Date();
+  document.getElementById('digest-date').textContent =
+    now.toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' });
+
+  const body = document.getElementById('digest-body');
+  body.innerHTML = '';
+
+  for (const topic of TOPICS) {
+    // Create section immediately with skeleton
+    const section = document.createElement('div');
+    section.className = 'topic-section';
+    section.innerHTML = `
+      <div class="topic-label">${topic.icon} ${topic.name}<span class="topic-label-line"></span></div>
+      <div class="story-list" id="stories-${topic.name.replace(/\W/g,'')}">${renderSkeleton()}${renderSkeleton()}</div>`;
+    body.appendChild(section);
+
+    // Fetch feeds in parallel
+    const allItems = [];
+    const results = await Promise.allSettled(topic.feeds.map(f => fetchFeed(f).then(items => ({ items, url: f }))));
+
+    results.forEach(r => {
+      if (r.status === 'fulfilled') {
+        r.value.items.forEach(item => allItems.push({ item, url: r.value.url }));
+      }
+    });
+
+    // Deduplicate by title, sort by date, take top 4
+    const seen = new Set();
+    const unique = allItems
+      .filter(({ item }) => { if (seen.has(item.title)) return false; seen.add(item.title); return true; })
+      .sort((a, b) => new Date(b.item.pubDate) - new Date(a.item.pubDate))
+      .slice(0, 4);
+
+    const container = document.getElementById('stories-' + topic.name.replace(/\W/g,''));
+    if (unique.length === 0) {
+      container.innerHTML = '<div class="error-msg">No recent stories found for this topic.</div>';
+    } else {
+      container.innerHTML = unique.map(({ item, url }) => renderStory(item, url)).join('');
+    }
+  }
+}
+
+loadDigest();
+</script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unsubscribe · Briefly</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #0f0e0c; --paper: #f5f2eb; --cream: #ede9df;
+      --accent: #2b4fff; --muted: #7a7670; --border: rgba(15,14,12,0.12);
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'DM Sans', sans-serif;
+    }
+    body { font-family: var(--sans); background: var(--paper); color: var(--ink); min-height: 100vh; display: flex; flex-direction: column; }
+    nav { display: flex; align-items: center; padding: 20px 48px; border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family: var(--serif); font-size: 21px; display: flex; align-items: center; gap: 7px; text-decoration: none; color: var(--ink); }
+    .logo-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+    main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 48px 20px; }
+    .card { background: #fff; border: 1px solid var(--border); border-radius: 20px; padding: 48px 40px; max-width: 460px; width: 100%; text-align: center; }
+    .icon { font-size: 40px; margin-bottom: 16px; }
+    h1 { font-family: var(--serif); font-size: 28px; font-weight: 400; margin-bottom: 10px; }
+    .sub { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 28px; }
+    .email-display { background: var(--cream); border-radius: 8px; padding: 10px 16px; font-size: 13px; color: var(--muted); margin-bottom: 28px; word-break: break-all; }
+    .btn { display: inline-block; padding: 12px 28px; border-radius: 100px; font-family: var(--sans); font-size: 14px; font-weight: 500; cursor: pointer; border: none; transition: opacity .15s; }
+    .btn-danger { background: #dc2626; color: #fff; width: 100%; margin-bottom: 10px; }
+    .btn-danger:hover { opacity: 0.85; }
+    .btn-ghost { background: none; border: 1px solid var(--border); color: var(--ink); width: 100%; }
+    .btn-ghost:hover { background: var(--cream); }
+    .state { display: none; }
+    .state.active { display: block; }
+    .success-icon { font-size: 40px; margin-bottom: 16px; }
+    .error-msg { font-size: 13px; color: #dc2626; margin-top: 12px; display: none; }
+    footer { padding: 24px 48px; border-top: 1px solid var(--border); text-align: center; font-size: 12px; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="nav-logo" href="/"><span class="logo-dot"></span> Briefly</a>
+  </nav>
+
+  <main>
+    <div class="card">
+      <!-- Confirm state -->
+      <div class="state active" id="state-confirm">
+        <div class="icon">👋</div>
+        <h1>Unsubscribe from Briefly?</h1>
+        <p class="sub">You'll stop receiving your daily brief. You can always sign up again at readbriefly.com.</p>
+        <div class="email-display" id="email-display">Loading…</div>
+        <button class="btn btn-danger" onclick="doUnsubscribe()">Yes, unsubscribe me</button>
+        <button class="btn btn-ghost" onclick="window.location.href='/'">Keep my subscription</button>
+        <div class="error-msg" id="error-msg">Something went wrong. Please try again or email hello@readbriefly.com</div>
+      </div>
+
+      <!-- Success state -->
+      <div class="state" id="state-success">
+        <div class="success-icon">✓</div>
+        <h1>You're unsubscribed.</h1>
+        <p class="sub">You won't receive any more briefs. If this was a mistake, just sign up again at readbriefly.com — it only takes a minute.</p>
+        <a href="/" class="btn btn-ghost" style="display:inline-block;text-decoration:none;margin-top:8px;">Back to Briefly</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>© 2026 Briefly · readbriefly.com</footer>
+
+  <script>
+    const SUPABASE_URL = 'https://zesuoeedskxmrtfvpigc.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inplc3VvZWVkc2t4bXJ0ZnZwaWdjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAxNjU1MjIsImV4cCI6MjA5NTc0MTUyMn0.p6UHsDoIVA6jvXct0VdfbHSxf09JQ-Gj-z-22LMMzRY';
+
+    // Decode base64 token → email
+    function getEmail() {
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get('token');
+      if (!token) return null;
+      try { return atob(token.replace(/-/g, '+').replace(/_/g, '/')); }
+      catch { return null; }
+    }
+
+    const email = getEmail();
+    const emailDisplay = document.getElementById('email-display');
+
+    if (!email) {
+      emailDisplay.textContent = 'Invalid unsubscribe link.';
+    } else {
+      emailDisplay.textContent = email;
+    }
+
+    async function doUnsubscribe() {
+      if (!email) return;
+      const btn = document.querySelector('.btn-danger');
+      btn.disabled = true;
+      btn.textContent = 'Unsubscribing…';
+
+      try {
+        const res = await fetch(
+          `${SUPABASE_URL}/rest/v1/signups?email=eq.${encodeURIComponent(email)}`,
+          {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+              'apikey': SUPABASE_ANON_KEY,
+              'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+              'Prefer': 'return=minimal',
+            },
+            body: JSON.stringify({ unsubscribed: true }),
+          }
+        );
+
+        if (res.ok) {
+          document.getElementById('state-confirm').classList.remove('active');
+          document.getElementById('state-success').classList.add('active');
+        } else {
+          throw new Error('Failed');
+        }
+      } catch {
+        btn.disabled = false;
+        btn.textContent = 'Yes, unsubscribe me';
+        document.getElementById('error-msg').style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>

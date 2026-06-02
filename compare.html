@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Briefly vs Morning Brew, The Hustle & more — Compare</title>
+  <meta name="description" content="How Briefly compares to Morning Brew, The Hustle, and other news newsletters. Personalized AI news vs one-size-fits-all digests.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='18' cy='16' r='10' stroke='%23111' stroke-width='2.5' fill='none'/><ellipse cx='18' cy='16' rx='4.5' ry='10' stroke='%23111' stroke-width='2.5' fill='none'/><line x1='8' y1='16' x2='28' y2='16' stroke='%23111' stroke-width='2.5'/><path d='M9.5 10 Q18 6.5 26.5 10' stroke='%233657F5' stroke-width='2.8' fill='none' stroke-linecap='round'/><path d='M9.5 22 Q18 25.5 26.5 22' stroke='%233657F5' stroke-width='2.8' fill='none' stroke-linecap='round'/></svg>">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --ink:#0f0e0c;--paper:#f5f2eb;--cream:#ede9df;
+      --accent:#2b4fff;--accent-light:#dce3ff;--muted:#7a7670;
+      --border:rgba(15,14,12,0.12);--green:#16a34a;--red:#dc2626;
+      --serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',sans-serif;
+    }
+    body{font-family:var(--sans);background:var(--paper);color:var(--ink);}
+    nav{display:flex;align-items:center;justify-content:space-between;padding:20px 48px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--paper);z-index:100;}
+    .nav-logo{font-family:var(--serif);font-size:21px;display:flex;align-items:center;gap:7px;text-decoration:none;color:var(--ink);}
+    .logo-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);}
+    .nav-links{display:flex;align-items:center;gap:20px;}
+    .nav-links a{font-size:13px;color:var(--muted);text-decoration:none;}
+    .nav-links a:hover{color:var(--ink);}
+    .btn-solid{background:var(--ink);color:var(--paper);padding:8px 18px;border-radius:100px;font-size:13px;font-weight:500;text-decoration:none;}
+
+    .hero{max-width:900px;margin:0 auto;padding:72px 48px 48px;}
+    .eyebrow{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:8px;margin-bottom:20px;}
+    .eyebrow-line{flex:0 0 26px;height:1px;background:var(--muted);}
+    .hero h1{font-family:var(--serif);font-size:clamp(36px,5vw,56px);font-weight:400;line-height:1.1;margin-bottom:16px;}
+    .hero p{font-size:16px;color:var(--muted);line-height:1.7;max-width:560px;}
+
+    .compare-body{max-width:960px;margin:0 auto;padding:0 48px 80px;overflow-x:auto;}
+
+    table{width:100%;border-collapse:collapse;background:#fff;border-radius:16px;overflow:hidden;border:1px solid var(--border);}
+    thead tr{background:var(--ink);}
+    thead th{padding:18px 20px;text-align:left;font-size:13px;font-weight:500;color:rgba(255,255,255,0.9);}
+    thead th:first-child{font-family:var(--serif);font-size:14px;}
+    thead th.briefly-col{background:var(--accent);color:#fff;}
+    tbody tr{border-bottom:1px solid var(--border);}
+    tbody tr:last-child{border-bottom:none;}
+    tbody tr:hover{background:#fafaf8;}
+    tbody td{padding:16px 20px;font-size:13px;vertical-align:top;}
+    tbody td:first-child{font-weight:500;color:var(--ink);}
+    .check{color:var(--green);font-size:16px;}
+    .cross{color:var(--red);font-size:16px;}
+    .partial{color:#d97706;font-size:13px;}
+    .briefly-col{background:rgba(43,79,255,0.04);}
+
+    .verdict{max-width:900px;margin:0 auto 56px;padding:0 48px;}
+    .verdict h2{font-family:var(--serif);font-size:28px;font-weight:400;margin-bottom:24px;}
+    .verdict-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;}
+    .verdict-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:22px;}
+    .verdict-name{font-size:13px;font-weight:500;color:var(--muted);margin-bottom:8px;}
+    .verdict-text{font-size:14px;line-height:1.6;color:var(--ink);}
+    .verdict-tag{display:inline-block;margin-top:10px;font-size:11px;padding:3px 10px;border-radius:100px;font-weight:500;}
+    .tag-better{background:#dcfce7;color:var(--green);}
+    .tag-different{background:var(--accent-light);color:var(--accent);}
+    .tag-broader{background:var(--cream);color:var(--muted);}
+
+    .cta{background:var(--ink);border-radius:20px;padding:48px;margin:0 48px 80px;max-width:900px;margin-left:auto;margin-right:auto;text-align:center;}
+    .cta h2{font-family:var(--serif);font-size:32px;font-weight:400;color:#fff;margin-bottom:10px;}
+    .cta p{font-size:14px;color:rgba(255,255,255,.6);margin-bottom:28px;}
+    .btn-accent{background:var(--accent);color:#fff;padding:12px 28px;border-radius:100px;font-size:14px;font-weight:500;text-decoration:none;display:inline-block;}
+
+    footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--muted);}
+    .footer-logo{font-family:var(--serif);font-size:16px;color:var(--ink);}
+    footer a{color:var(--muted);text-decoration:none;}
+
+    @media(max-width:640px){
+      nav{padding:16px 20px;}
+      .hero,.verdict,.compare-body{padding-left:20px;padding-right:20px;}
+      .cta{margin:0 20px 60px;}
+      footer{padding:20px;flex-direction:column;gap:10px;text-align:center;}
+    }
+  </style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="/"><span class="logo-dot"></span> Briefly</a>
+  <div class="nav-links">
+    <a href="/digest.html">Daily digest</a>
+    <a href="/sources.html">Sources</a>
+    <a class="btn-solid" href="/">Get started free</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="eyebrow"><span class="eyebrow-line"></span> How we compare</div>
+  <h1>Personalized news<br>vs one-size-fits-all.</h1>
+  <p>Most newsletters send everyone the same thing. Briefly builds a different brief for every reader based on what they actually care about.</p>
+</div>
+
+<div class="compare-body">
+  <table>
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th class="briefly-col">✦ Briefly</th>
+        <th>Morning Brew</th>
+        <th>The Hustle</th>
+        <th>1440 Daily</th>
+        <th>Axios AM</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Personalized to your topics</td>
+        <td class="briefly-col"><span class="check">✓</span> Fully personalized</td>
+        <td><span class="cross">✗</span> Same for everyone</td>
+        <td><span class="cross">✗</span> Same for everyone</td>
+        <td><span class="cross">✗</span> Same for everyone</td>
+        <td><span class="cross">✗</span> Same for everyone</td>
+      </tr>
+      <tr>
+        <td>AI-powered relevance scoring</td>
+        <td class="briefly-col"><span class="check">✓</span> Claude AI</td>
+        <td><span class="cross">✗</span> Human editors</td>
+        <td><span class="cross">✗</span> Human editors</td>
+        <td><span class="cross">✗</span> Human editors</td>
+        <td><span class="cross">✗</span> Human editors</td>
+      </tr>
+      <tr>
+        <td>"Why it matters to you" explanation</td>
+        <td class="briefly-col"><span class="check">✓</span> Every story</td>
+        <td><span class="cross">✗</span> No</td>
+        <td><span class="cross">✗</span> No</td>
+        <td><span class="cross">✗</span> No</td>
+        <td><span class="partial">~ Smart brevity</span></td>
+      </tr>
+      <tr>
+        <td>Custom topic tracking</td>
+        <td class="briefly-col"><span class="check">✓</span> Any keyword/company</td>
+        <td><span class="cross">✗</span> No</td>
+        <td><span class="cross">✗</span> No</td>
+        <td><span class="cross">✗</span> No</td>
+        <td><span class="cross">✗</span> No</td>
+      </tr>
+      <tr>
+        <td>Sources monitored</td>
+        <td class="briefly-col">80+ RSS feeds</td>
+        <td>Curated selection</td>
+        <td>Curated selection</td>
+        <td>100+ sources</td>
+        <td>Curated selection</td>
+      </tr>
+      <tr>
+        <td>Price</td>
+        <td class="briefly-col"><span class="check">✓</span> Free</td>
+        <td>Free (paid tier)</td>
+        <td>Free (paid tier)</td>
+        <td>Free</td>
+        <td>Free (paid tier)</td>
+      </tr>
+      <tr>
+        <td>Ads / sponsored content</td>
+        <td class="briefly-col"><span class="check">✓</span> None</td>
+        <td><span class="cross">✗</span> Yes</td>
+        <td><span class="cross">✗</span> Yes</td>
+        <td><span class="cross">✗</span> Yes</td>
+        <td><span class="cross">✗</span> Yes</td>
+      </tr>
+      <tr>
+        <td>Read time</td>
+        <td class="briefly-col">~3 minutes</td>
+        <td>~5-10 minutes</td>
+        <td>~5 minutes</td>
+        <td>~5 minutes</td>
+        <td>~3 minutes</td>
+      </tr>
+      <tr>
+        <td>Delivery frequency</td>
+        <td class="briefly-col">Daily, 3x/week, or weekly</td>
+        <td>Daily</td>
+        <td>Daily</td>
+        <td>Daily</td>
+        <td>Daily</td>
+      </tr>
+      <tr>
+        <td>Topic coverage</td>
+        <td class="briefly-col">16 topic categories</td>
+        <td>Business & finance</td>
+        <td>Business & tech</td>
+        <td>General news</td>
+        <td>Politics & policy</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="verdict">
+  <h2>The honest breakdown</h2>
+  <div class="verdict-grid">
+    <div class="verdict-card">
+      <div class="verdict-name">vs Morning Brew</div>
+      <div class="verdict-text">Morning Brew is great if you work in finance or business. But it's the same email for a million readers. Briefly is built around what you specifically care about.</div>
+      <span class="verdict-tag tag-better">Briefly is more personal</span>
+    </div>
+    <div class="verdict-card">
+      <div class="verdict-name">vs The Hustle</div>
+      <div class="verdict-text">The Hustle has a great writing style but covers a narrow band of topics. Briefly covers everything from AI to climate to biotech — whatever you care about.</div>
+      <span class="verdict-tag tag-different">Different audience</span>
+    </div>
+    <div class="verdict-card">
+      <div class="verdict-name">vs 1440 Daily</div>
+      <div class="verdict-text">1440 covers a wide range of topics and is genuinely good. But it's still one brief for everyone. Briefly personalizes every story selection and explanation to you.</div>
+      <span class="verdict-tag tag-better">Briefly is more relevant</span>
+    </div>
+    <div class="verdict-card">
+      <div class="verdict-name">vs Axios AM</div>
+      <div class="verdict-text">Axios is excellent for politics and policy. If that's your focus, it's great. Briefly covers the full landscape and tells you why each story matters to your specific interests.</div>
+      <span class="verdict-tag tag-different">Different focus</span>
+    </div>
+  </div>
+</div>
+
+<div class="cta">
+  <h2>The brief that knows you.</h2>
+  <p>Free, personalized, no ads. Takes 2 minutes to set up.</p>
+  <a class="btn-accent" href="/">Start my free brief →</a>
+</div>
+
+<footer>
+  <div class="footer-logo">Briefly</div>
+  <div style="display:flex;gap:20px;"><a href="/">Home</a><a href="/digest.html">Digest</a><a href="/sources.html">Sources</a><a href="mailto:hello@readbriefly.com">Contact</a></div>
+  <div>© 2026 Briefly · readbriefly.com</div>
+</footer>
+</body>
+</html>

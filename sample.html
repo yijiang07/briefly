@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sample Brief — Briefly</title>
+  <meta name="description" content="See what a Briefly morning brief looks like for AI founders, investors, biotech researchers, and climate professionals.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='18' cy='16' r='10' stroke='%23111' stroke-width='2.5' fill='none'/><ellipse cx='18' cy='16' rx='4.5' ry='10' stroke='%23111' stroke-width='2.5' fill='none'/><line x1='8' y1='16' x2='28' y2='16' stroke='%23111' stroke-width='2.5'/><path d='M9.5 10 Q18 6.5 26.5 10' stroke='%233657F5' stroke-width='2.8' fill='none' stroke-linecap='round'/><path d='M9.5 22 Q18 25.5 26.5 22' stroke='%233657F5' stroke-width='2.8' fill='none' stroke-linecap='round'/></svg>">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --ink:#0f0e0c;--paper:#f5f2eb;--cream:#ede9df;
+      --accent:#2b4fff;--accent-light:#dce3ff;--muted:#7a7670;
+      --border:rgba(15,14,12,0.12);
+      --serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',sans-serif;
+    }
+    body{font-family:var(--sans);background:var(--paper);color:var(--ink);}
+    nav{display:flex;align-items:center;justify-content:space-between;padding:20px 48px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--paper);z-index:100;}
+    .nav-logo{font-family:var(--serif);font-size:21px;display:flex;align-items:center;gap:7px;text-decoration:none;color:var(--ink);}
+    .logo-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);}
+    .nav-links{display:flex;align-items:center;gap:20px;}
+    .nav-links a{font-size:13px;color:var(--muted);text-decoration:none;}
+    .nav-links a:hover{color:var(--ink);}
+    .btn-solid{background:var(--ink);color:var(--paper);padding:8px 18px;border-radius:100px;font-size:13px;font-weight:500;text-decoration:none;}
+
+    .hero{max-width:860px;margin:0 auto;padding:72px 48px 48px;}
+    .eyebrow{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:8px;margin-bottom:20px;}
+    .eyebrow-line{flex:0 0 26px;height:1px;background:var(--muted);}
+    .hero h1{font-family:var(--serif);font-size:clamp(36px,5vw,52px);font-weight:400;line-height:1.1;margin-bottom:16px;}
+    .hero p{font-size:16px;color:var(--muted);line-height:1.7;}
+
+    .persona-bar{max-width:860px;margin:0 auto;padding:0 48px 40px;display:flex;gap:8px;flex-wrap:wrap;}
+    .ptab{padding:8px 18px;border-radius:100px;border:1px solid var(--border);font-size:13px;cursor:pointer;background:var(--paper);transition:all .15s;}
+    .ptab:hover{border-color:var(--accent);color:var(--accent);}
+    .ptab.on{background:var(--accent);color:#fff;border-color:var(--accent);}
+
+    .sample-body{max-width:860px;margin:0 auto;padding:0 48px 80px;}
+    .persona-panel{display:none;}
+    .persona-panel.active{display:block;}
+
+    .email-shell{background:#fff;border-radius:20px;border:1px solid var(--border);overflow:hidden;box-shadow:0 4px 32px rgba(0,0,0,.07);}
+    .email-chrome{background:var(--cream);padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;}
+    .chrome-dots{display:flex;gap:6px;}
+    .chrome-dot{width:10px;height:10px;border-radius:50%;}
+    .chrome-dot:nth-child(1){background:#ff5f57;}
+    .chrome-dot:nth-child(2){background:#febc2e;}
+    .chrome-dot:nth-child(3){background:#28c840;}
+    .chrome-from{font-size:12px;color:var(--muted);}
+    .chrome-from strong{color:var(--ink);}
+    .email-inner{padding:36px 40px;}
+    .email-header{border-bottom:1px solid var(--border);padding-bottom:16px;margin-bottom:20px;}
+    .email-logo{font-family:var(--serif);font-size:19px;display:flex;align-items:center;gap:6px;margin-bottom:4px;}
+    .email-date{font-size:11px;color:var(--muted);}
+    .email-intro{font-size:14px;color:var(--muted);margin-bottom:16px;line-height:1.5;}
+    .overview-block{background:#eef1ff;border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:14px 18px;margin-bottom:20px;}
+    .overview-label{font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:5px;}
+    .overview-text{font-size:13px;color:var(--ink);line-height:1.7;}
+    .story{padding:16px 0;border-bottom:1px solid var(--border);}
+    .story:last-child{border-bottom:none;padding-bottom:0;}
+    .story-meta{display:flex;align-items:center;gap:8px;margin-bottom:5px;flex-wrap:wrap;}
+    .tag{font-size:10px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:100px;background:var(--accent-light);color:var(--accent);}
+    .story-source{font-size:11px;color:var(--muted);}
+    .story-headline{font-family:var(--serif);font-size:16px;font-weight:400;margin-bottom:5px;line-height:1.4;color:var(--ink);}
+    .story-why{font-size:12px;color:var(--muted);line-height:1.6;}
+    .story-why strong{color:var(--ink);font-weight:500;}
+
+    .cta{background:var(--ink);border-radius:20px;padding:48px;margin:0 48px 80px;max-width:860px;margin-left:auto;margin-right:auto;text-align:center;}
+    .cta h2{font-family:var(--serif);font-size:32px;font-weight:400;color:#fff;margin-bottom:10px;}
+    .cta p{font-size:14px;color:rgba(255,255,255,.6);margin-bottom:28px;}
+    .btn-accent{background:var(--accent);color:#fff;padding:12px 28px;border-radius:100px;font-size:14px;font-weight:500;text-decoration:none;display:inline-block;}
+
+    footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--muted);}
+    .footer-logo{font-family:var(--serif);font-size:16px;color:var(--ink);}
+    footer a{color:var(--muted);text-decoration:none;}
+
+    @media(max-width:640px){
+      nav{padding:16px 20px;}
+      .hero,.persona-bar,.sample-body{padding-left:20px;padding-right:20px;}
+      .email-inner{padding:20px;}
+      .cta{margin:0 20px 60px;}
+      footer{padding:20px;flex-direction:column;gap:10px;text-align:center;}
+    }
+  </style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="/"><span class="logo-dot"></span> Briefly</a>
+  <div class="nav-links">
+    <a href="/digest.html">Daily digest</a>
+    <a href="/compare.html">Compare</a>
+    <a class="btn-solid" href="/">Get started free</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="eyebrow"><span class="eyebrow-line"></span> Sample briefs</div>
+  <h1>See exactly what<br>you'd receive.</h1>
+  <p>Pick a persona below to see a real example of what your personalized brief looks like.</p>
+</div>
+
+<div class="persona-bar">
+  <div class="ptab on" onclick="showP(this,'ai')">⚡ AI founder</div>
+  <div class="ptab" onclick="showP(this,'vc')">💰 VC / investor</div>
+  <div class="ptab" onclick="showP(this,'bio')">🧬 Biotech researcher</div>
+  <div class="ptab" onclick="showP(this,'climate')">🌱 Climate professional</div>
+</div>
+
+<div class="sample-body">
+
+  <!-- AI founder -->
+  <div class="persona-panel active" id="p-ai">
+    <div class="email-shell">
+      <div class="email-chrome">
+        <div class="chrome-dots"><div class="chrome-dot"></div><div class="chrome-dot"></div><div class="chrome-dot"></div></div>
+        <div class="chrome-from">From: <strong>Briefly &lt;hello@readbriefly.com&gt;</strong> · Your Briefly for Monday, June 1</div>
+      </div>
+      <div class="email-inner">
+        <div class="email-header">
+          <div class="email-logo"><span class="logo-dot"></span> Briefly</div>
+          <div class="email-date">Monday, June 1 · personalized to your interests</div>
+        </div>
+        <div class="email-intro">Here's what matters today across <strong>AI & ML, Startups, Anthropic</strong>.</div>
+        <div class="overview-block">
+          <div class="overview-label">Today's overview</div>
+          <div class="overview-text">Frontier AI regulation is accelerating — Anthropic's EU moves and a new congressional hearing signal that the policy window is narrowing faster than most founders expected. Meanwhile, YC's infrastructure-heavy S25 batch suggests the smart money is moving down the stack.</div>
+        </div>
+        <div class="story">
+          <div class="story-meta"><span class="tag">AI</span><span class="story-source">Reuters · MIT Tech Review</span></div>
+          <div class="story-headline">Anthropic announces new model capability limits amid EU regulatory pressure</div>
+          <div class="story-why"><strong>Why it matters to you:</strong> You track Anthropic — this directly affects what frontier models can do in your product's roadmap.</div>
+        </div>
+        <div class="story">
+          <div class="story-meta"><span class="tag">Startups</span><span class="story-source">TechCrunch · Bloomberg</span></div>
+          <div class="story-headline">YC S25 batch: 40% of companies building AI infrastructure, not applications</div>
+          <div class="story-why"><strong>Why it matters to you:</strong> Structural shift in where YC is placing bets — relevant if you're thinking about your company's layer in the stack.</div>
+        </div>
+        <div class="story">
+          <div class="story-meta"><span class="tag">AI</span><span class="story-source">The Information</span></div>
+          <div class="story-headline">New benchmark shows frontier models hitting reasoning ceiling</div>
+          <div class="story-why"><strong>Why it matters to you:</strong> Raises questions about the next capability leap and product roadmap timing.</div>
+        </div>
+        <div class="story">
+          <div class="story-meta"><span class="tag">Policy</span><span class="story-source">Politico · Reuters</span></div>
+          <div class="story-headline">Senate AI subcommittee schedules first mandatory hearing for foundation model labs</div>
+          <div class="story-why"><strong>Why it matters to you:</strong> Compliance requirements are coming — earlier awareness means more runway to prepare.</div>
+        </div>
+        <div class="story">
+          <div class="story-meta"><span class="tag">Startups</span><span class="story-source">Crunchbase</span></div>
+          <div class="story-headline">AI infrastructure funding hits $8B in Q1 — outpacing application layer 3:1</div>
+          <div class="story-why"><strong>Why it matters to you:</strong> Capital is concentrating at the infrastructure layer — signals where the defensible businesses are being built.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VC -->
+  <div class="persona-panel" id="p-vc">
+    <div class="email-shell">
+      <div class="email-chrome">
+        <div class="chrome-dots"><div class="chrome-dot"></div><div class="chrome-dot"></div><div class="chrome-dot"></div></div>
+        <div class="chrome-from">From: <strong>Briefly &lt;hello@readbriefly.com&gt;</strong> · Your Briefly for Monday, June 1</div>
+      </div>
+      <div class="email-inner">
+        <div class="email-header">
+          <div class="email-logo"><span class="logo-dot"></span> Briefly</div>
+          <div class="email-date">Monday, June 1 · personalized to your interests</div>
+        </div>
+        <div class="email-intro">Here's what matters today across <strong>Venture capital, Finance & macro, Startups</strong>.</div>
+        <div class="overview-block">
+          <div class="overview-label">Today's overview</div>
+          <div class="overview-text">The macro picture tightened this morning — hotter-than-expected inflation data is pushing rate cut expectations to Q4 at the earliest, which compresses multiples across the board. Sequoia's new fund timing looks deliberate given the dislocation.</div>
+        </div>
+        <div class="story">
+          <div class="story-meta"><span class="tag">Finance</span><span class="story-source">WSJ · FT</span></div>
+          <div class="story-headline">Fed signals one rate cut in 2025 as inflation data comes in hotter than expected</div>
+          <div class="story-why"><strong>Why it matters to you:</strong> Tighter-for-longer rates compress startup valuations and slow LP commitments — key signal for your deployment pace.</div>
+        </div>
+        <div class="story">
+          <div class="story-meta"><span class="tag">VC</span><span class="story-source">TechCrunch · Bloomberg</span></div>
+          <div class="story-headline">Sequoia raises $2.5B new fund as AI deal flow accelerates</div>
+          <div class="story-why"><strong>Why it matters to you:</strong> Signals where the market is heading and who you'll be competing with for deals.</div>
+        </div>
+        <div class="story">
+          <div class="story-meta"><span class="tag">Startups</span><span class="story-source">The Information</span></div>
+          <div class="story-headline">Series A valuations drop 18% YoY as investors push for profitability</div>
+          <div class="story-why"><strong>Why it matters to you:</strong> Directly affects entry pricing for your next deal — market is repricing early-stage risk.</div>
+        </div>
+        <div class="story">
+          <div class="story-meta"><span class="tag">Finance</span><span class="story-source">Reuters</span></div>
+          <div class="story-headline">Treasury yields climb to 4.8% on stronger-than-expected jobs report</div>
+          <div class="story-why"><strong>Why it matters to you:</strong> Rising yields historically correlate with reduced VC deployment — watch LP sentiment in coming weeks.</div>
+        </div>
+        <div class="story">
+          <div class="story-meta"><span class="tag">VC</span><span class="story-source">Crunchbase</span></div>
+          <div class="story-headline">Q1 2025 global VC funding down 12% — but AI deals up 40%</div>
+          <div class="story-why"><strong>Why it matters to you:</strong> The bifurcation is sharpening — non-AI deals are getting harder while AI remains competitive.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Biotech -->
+  <div class="persona-panel" id="p-bio">
+    <div class="email-shell">
+      <div class="email-chrome">
+        <div class="chrome-dots"><div class="chrome-dot"></div><div class="chrome-dot"></div><div class="chrome-dot"></div></div>
+        <div class="chrome-from">From: <strong>Briefly &lt;hello@readbriefly.com&gt;</strong> · Your Briefly for Monday, June 1</div>
+      </div>
+      <div class="email-inner">
+        <div class="email-header">
+          <div class="email-logo"><span class="logo-dot"></span> Briefly</div>
+          <div class="email-date">Monday, June 1 · personalized to your interests</div>
+        </div>
+        <div class="email-intro">Here's what matters today across <strong>Biotech & health, Research & academia, Policy & regulation</strong>.</div>
+        <div class="overview-block">
+          <div class="overview-label">Today's overview</div>
+          <div class="overview-text">A landmark FDA approval and a new AlphaFold capability release are reshaping the drug discovery landscape simultaneously — the regulatory and computational barriers are falling faster than most timelines assumed. NIH's AI guidance adds a new compliance layer worth watching.</div>
+        </div>
+        <div class="story">
+          <div class="story-meta"><span class="tag">Biotech</span><span class="story-source">STAT News · Nature</span></div>
+          <div class="story-headline">FDA approves first CRISPR-based treatment for sickle cell disease</div>
+          <div class="story-why"><strong>Why it matters to you:</strong> Landmark approval that opens the regulatory door for gene-editing therapies across the field.</div>
+        </div>
+        <div class="story">
+          <div class="story-meta"><span class="tag">Research</span><span class="story-source">Science · MIT News</span></div>
+          <div class="story-headline">AlphaFold 3 predicts protein-drug interactions with near-lab accuracy</div>
+          <div class="story-why"><strong>Why it matters to you:</strong> Could accelerate your drug discovery pipeline significantly — reduces wet lab validation burden.</div>
+        </div>
+        <div class="story">
+          <div class="story-meta"><span class="tag">Policy</span><span class="story-source">Reuters · Fierce Pharma</span></div>
+          <div class="story-headline">NIH proposes new rules on AI use in clinical trial design</div>
+          <div class="story-why"><strong>Why it matters to you:</strong> Regulatory signal that will affect how you can use AI tools in your research methodology.</div>
+        </div>
+        <div class="story">
+          <div class="story-meta"><span class="tag">Biotech</span><span class="story-source">STAT News</span></div>
+          <div class="story-headline">Pfizer acquires AI-driven drug discovery startup for $1.4B</div>
+          <div class="story-why"><strong>Why it matters to you:</strong> Signals big pharma's valuation of AI-native drug discovery — sets M&A precedent for the sector.</div>
+        </div>
+        <div class="story">
+          <div class="story-meta"><span class="tag">Research</span><span class="story-source">Nature</span></div>
+          <div class="story-headline">New RNA-targeting approach shows promise in neurodegeneration models</div>
+          <div class="story-why"><strong>Why it matters to you:</strong> You track research — early signal in a space with few effective therapeutic options.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Climate -->
+  <div class="persona-panel" id="p-climate">
+    <div class="email-shell">
+      <div class="email-chrome">
+        <div class="chrome-dots"><div class="chrome-dot"></div><div class="chrome-dot"></div><div class="chrome-dot"></div></div>
+        <div class="chrome-from">From: <strong>Briefly &lt;hello@readbriefly.com&gt;</strong> · Your Briefly for Monday, June 1</div>
+      </div>
+      <div class="email-inner">
+        <div class="email-header">
+          <div class="email-logo"><span class="logo-dot"></span> Briefly</div>
+          <div class="email-date">Monday, June 1 · personalized to your interests</div>
+        </div>
+        <div class="email-intro">Here's what matters today across <strong>Climate & energy, Policy & regulation, Finance & macro</strong>.</div>
+        <div class="overview-block">
+          <div class="overview-label">Today's overview</div>
+          <div class="overview-text">Solar deployment is outpacing every forecast while the EPA tightens methane rules — the policy and market signals are both pointing in the same direction for clean energy. The green bond market hitting $500B is the capital confirmation.</div>
+        </div>
+        <div class="story">
+          <div class="story-meta"><span class="tag">Climate</span><span class="story-source">Bloomberg · FT</span></div>
+          <div class="story-headline">IEA: solar capacity additions hit record 400GW in 2024, outpacing all forecasts</div>
+          <div class="story-why"><strong>Why it matters to you:</strong> The scale shift changes the economics of every clean energy project you're evaluating.</div>
+        </div>
+        <div class="story">
+          <div class="story-meta"><span class="tag">Policy</span><span class="story-source">E&E News · Reuters</span></div>
+          <div class="story-headline">EPA finalizes stricter methane rules for oil and gas operations</div>
+          <div class="story-why"><strong>Why it matters to you:</strong> New compliance requirements that directly affect the sectors you track and work with.</div>
+        </div>
+        <div class="story">
+          <div class="story-meta"><span class="tag">Finance</span><span class="story-source">WSJ · Bloomberg</span></div>
+          <div class="story-headline">Green bond issuance hits $500B as institutional investors demand ESG exposure</div>
+          <div class="story-why"><strong>Why it matters to you:</strong> Signals growing capital availability for climate projects — relevant to your funding landscape.</div>
+        </div>
+        <div class="story">
+          <div class="story-meta"><span class="tag">Climate</span><span class="story-source">Inside Climate News</span></div>
+          <div class="story-headline">New study: grid-scale battery storage costs drop 40% in 18 months</div>
+          <div class="story-why"><strong>Why it matters to you:</strong> Storage economics are the remaining bottleneck for renewable baseload — this accelerates the timeline.</div>
+        </div>
+        <div class="story">
+          <div class="story-meta"><span class="tag">Policy</span><span class="story-source">Reuters</span></div>
+          <div class="story-headline">EU carbon border tax takes effect, affecting $10B in annual imports</div>
+          <div class="story-why"><strong>Why it matters to you:</strong> First major carbon pricing mechanism affecting global trade flows — watch for US response.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="cta">
+  <h2>Your brief starts tomorrow.</h2>
+  <p>Free, personalized, no ads. Takes 2 minutes to set up.</p>
+  <a class="btn-accent" href="/">Get my free brief →</a>
+</div>
+
+<footer>
+  <div class="footer-logo">Briefly</div>
+  <div style="display:flex;gap:20px;"><a href="/">Home</a><a href="/digest.html">Digest</a><a href="/sources.html">Sources</a><a href="/compare.html">Compare</a></div>
+  <div>© 2026 Briefly · readbriefly.com</div>
+</footer>
+
+<script>
+function showP(tab, name) {
+  document.querySelectorAll('.persona-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.ptab').forEach(t => t.classList.remove('on'));
+  document.getElementById('p-' + name).classList.add('active');
+  tab.classList.add('on');
+}
+</script>
+</body>
+</html>

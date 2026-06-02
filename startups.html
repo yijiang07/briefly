@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Startups News — Briefly</title>
+  <meta name="description" content="Latest startups news headlines, curated from 80+ trusted sources by Briefly. Updated daily.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='18' cy='16' r='10' stroke='%23111' stroke-width='2.5' fill='none'/><ellipse cx='18' cy='16' rx='4.5' ry='10' stroke='%23111' stroke-width='2.5' fill='none'/><line x1='8' y1='16' x2='28' y2='16' stroke='%23111' stroke-width='2.5'/><path d='M9.5 10 Q18 6.5 26.5 10' stroke='%233657F5' stroke-width='2.8' fill='none' stroke-linecap='round'/><path d='M9.5 22 Q18 25.5 26.5 22' stroke='%233657F5' stroke-width='2.8' fill='none' stroke-linecap='round'/></svg>">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{--ink:#0f0e0c;--paper:#f5f2eb;--cream:#ede9df;--accent:#2b4fff;--accent-light:#dce3ff;--muted:#7a7670;--border:rgba(15,14,12,0.12);--serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',sans-serif;}
+    body{font-family:var(--sans);background:var(--paper);color:var(--ink);}
+    nav{display:flex;align-items:center;justify-content:space-between;padding:20px 48px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--paper);z-index:100;}
+    .nav-logo{font-family:var(--serif);font-size:21px;display:flex;align-items:center;gap:7px;text-decoration:none;color:var(--ink);}
+    .logo-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);}
+    .nav-links{display:flex;align-items:center;gap:20px;}
+    .nav-links a{font-size:13px;color:var(--muted);text-decoration:none;}
+    .nav-links a:hover{color:var(--ink);}
+    .btn-solid{background:var(--ink);color:var(--paper);padding:8px 18px;border-radius:100px;font-size:13px;font-weight:500;text-decoration:none;}
+    .hero{max-width:860px;margin:0 auto;padding:72px 48px 48px;}
+    .eyebrow{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:8px;margin-bottom:20px;}
+    .eyebrow-line{flex:0 0 26px;height:1px;background:var(--muted);}
+    .hero h1{font-family:var(--serif);font-size:clamp(36px,5vw,52px);font-weight:400;line-height:1.1;margin-bottom:12px;}
+    .hero p{font-size:16px;color:var(--muted);line-height:1.7;}
+    .topic-body{max-width:860px;margin:0 auto;padding:0 48px 80px;}
+    .story-list{background:#fff;border-radius:16px;border:1px solid var(--border);overflow:hidden;margin-bottom:32px;}
+    .story-item{padding:20px 26px;border-bottom:1px solid var(--border);transition:background .12s;}
+    .story-item:last-child{border-bottom:none;}
+    .story-item:hover{background:#fafaf8;}
+    .story-source{font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:5px;}
+    .story-headline{font-family:var(--serif);font-size:17px;font-weight:400;line-height:1.4;color:var(--ink);margin-bottom:5px;}
+    .story-headline a{text-decoration:none;color:inherit;}
+    .story-headline a:hover{color:var(--accent);}
+    .story-time{font-size:11px;color:var(--muted);}
+    .skeleton{animation:shimmer 1.4s infinite;}
+    .skeleton-line{height:14px;background:var(--cream);border-radius:4px;margin-bottom:8px;}
+    .skeleton-line.short{width:35%;}
+    .skeleton-line.long{width:85%;}
+    .skeleton-line.med{width:65%;}
+    @keyframes shimmer{0%,100%{opacity:1}50%{opacity:.5}}
+    .other-topics{margin-bottom:40px;}
+    .other-topics h3{font-family:var(--serif);font-size:20px;font-weight:400;margin-bottom:16px;}
+    .topic-chips{display:flex;gap:8px;flex-wrap:wrap;}
+    .topic-chip{padding:8px 16px;border-radius:100px;border:1px solid var(--border);font-size:13px;text-decoration:none;color:var(--ink);transition:all .15s;}
+    .topic-chip:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-light);}
+    .cta-inline{background:var(--cream);border-radius:14px;padding:28px;text-align:center;}
+    .cta-inline h3{font-family:var(--serif);font-size:22px;font-weight:400;margin-bottom:8px;}
+    .cta-inline p{font-size:13px;color:var(--muted);margin-bottom:16px;}
+    .btn-accent{background:var(--accent);color:#fff;padding:10px 22px;border-radius:100px;font-size:13px;font-weight:500;text-decoration:none;display:inline-block;}
+    footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--muted);}
+    .footer-logo{font-family:var(--serif);font-size:16px;color:var(--ink);}
+    footer a{color:var(--muted);text-decoration:none;}
+    @media(max-width:640px){nav{padding:16px 20px;}.hero,.topic-body{padding-left:20px;padding-right:20px;}footer{padding:20px;flex-direction:column;gap:10px;text-align:center;}}
+  </style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="/"><span class="logo-dot"></span> Briefly</a>
+  <div class="nav-links">
+    <a href="/digest.html">Daily digest</a>
+    <a href="/archive.html">Archive</a>
+    <a class="btn-solid" href="/">Get started free</a>
+  </div>
+</nav>
+<div class="hero">
+  <div class="eyebrow"><span class="eyebrow-line"></span> Topic feed</div>
+  <h1>🚀 Startups</h1>
+  <p>Funding rounds, founder stories, and the latest from the startup ecosystem.</p>
+</div>
+<div class="topic-body">
+  <div class="story-list" id="story-list">
+    <div class="story-item skeleton"><div class="skeleton-line short"></div><div class="skeleton-line long"></div><div class="skeleton-line med"></div></div>
+    <div class="story-item skeleton"><div class="skeleton-line short"></div><div class="skeleton-line long"></div><div class="skeleton-line med"></div></div>
+    <div class="story-item skeleton"><div class="skeleton-line short"></div><div class="skeleton-line long"></div><div class="skeleton-line med"></div></div>
+    <div class="story-item skeleton"><div class="skeleton-line short"></div><div class="skeleton-line long"></div><div class="skeleton-line med"></div></div>
+  </div>
+  <div class="other-topics">
+    <h3>Explore other topics</h3>
+    <div class="topic-chips">
+      <a class="topic-chip" href="/topics/ai.html">⚡ AI & ML</a>
+      <a class="topic-chip" href="/topics/startups.html">🚀 Startups</a>
+      <a class="topic-chip" href="/topics/finance.html">📈 Finance</a>
+      <a class="topic-chip" href="/topics/climate.html">🌱 Climate</a>
+      <a class="topic-chip" href="/topics/biotech.html">🧬 Biotech</a>
+      <a class="topic-chip" href="/topics/world.html">🌍 World</a>
+    </div>
+  </div>
+  <div class="cta-inline">
+    <h3>Get this in your inbox.</h3>
+    <p>Sign up free and get a personalized brief built around this topic every morning.</p>
+    <a class="btn-accent" href="/">Get my free brief →</a>
+  </div>
+</div>
+<footer>
+  <div class="footer-logo">Briefly</div>
+  <div style="display:flex;gap:20px;"><a href="/">Home</a><a href="/digest.html">Digest</a><a href="/sources.html">Sources</a><a href="mailto:hello@readbriefly.com">Contact</a></div>
+  <div>© 2026 Briefly · readbriefly.com</div>
+</footer>
+<script>
+const RSS2JSON = 'https://api.rss2json.com/v1/api.json?api_key=YOUR_RSS2JSON_KEY&rss_url=';
+const FEEDS = ["https://techcrunch.com/category/startups/feed/", "https://news.crunchbase.com/feed/"];
+
+function timeAgo(d) { const s=(Date.now()-new Date(d))/1000; if(s<3600) return Math.floor(s/60)+'m ago'; if(s<86400) return Math.floor(s/3600)+'h ago'; return Math.floor(s/86400)+'d ago'; }
+function stripHtml(s) { return (s||'').replace(/<[^>]+>/g,'').trim(); }
+function sourceName(url) {
+  try {
+    const h=new URL(url).hostname.replace('www.','').replace('feeds.','');
+    const m={'reuters.com':'Reuters','bbci.co.uk':'BBC','bbc.co.uk':'BBC','techcrunch.com':'TechCrunch','theverge.com':'The Verge','technologyreview.com':'MIT Tech Review','cnbc.com':'CNBC','fortune.com':'Fortune','theguardian.com':'The Guardian','statnews.com':'STAT News','crunchbase.com':'Crunchbase','insideclimatenews.org':'Inside Climate News'};
+    return m[h]||h.split('.')[0];
+  } catch { return 'News'; }
+}
+
+async function load() {
+  const all=[]; const seen=new Set();
+  await Promise.allSettled(FEEDS.map(async f => {
+    try {
+      const r=await fetch(RSS2JSON+encodeURIComponent(f)+'&count=10');
+      const d=await r.json();
+      (d.items||[]).forEach(item => {
+        if(!item.title||seen.has(item.title)) return;
+        seen.add(item.title);
+        all.push({title:stripHtml(item.title),link:item.link,pubDate:item.pubDate,source:sourceName(f)});
+      });
+    } catch {}
+  }));
+  all.sort((a,b)=>new Date(b.pubDate)-new Date(a.pubDate));
+  const top=all.slice(0,10);
+  const list=document.getElementById('story-list');
+  if(!top.length){list.innerHTML='<div style="padding:32px;text-align:center;color:var(--muted);font-size:14px;">No recent stories — check back soon.</div>';return;}
+  list.innerHTML=top.map(s=>`
+    <div class="story-item">
+      <div class="story-source">${s.source}</div>
+      <div class="story-headline"><a href="${s.link}" target="_blank" rel="noopener">${s.title}</a></div>
+      <div class="story-time">${s.pubDate?timeAgo(s.pubDate):''}</div>
+    </div>`).join('');
+}
+load();
+</script>
+</body>
+</html>

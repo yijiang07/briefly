@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sources — Briefly</title>
+  <meta name="description" content="Briefly monitors 80+ trusted news sources across tech, finance, science, climate, and world news to build your personalized morning brief.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='18' cy='16' r='10' stroke='%23111' stroke-width='2.5' fill='none'/><ellipse cx='18' cy='16' rx='4.5' ry='10' stroke='%23111' stroke-width='2.5' fill='none'/><line x1='8' y1='16' x2='28' y2='16' stroke='%23111' stroke-width='2.5'/><path d='M9.5 10 Q18 6.5 26.5 10' stroke='%233657F5' stroke-width='2.8' fill='none' stroke-linecap='round'/><path d='M9.5 22 Q18 25.5 26.5 22' stroke='%233657F5' stroke-width='2.8' fill='none' stroke-linecap='round'/></svg>">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --ink:#0f0e0c;--paper:#f5f2eb;--cream:#ede9df;
+      --accent:#2b4fff;--accent-light:#dce3ff;--muted:#7a7670;
+      --border:rgba(15,14,12,0.12);
+      --serif:'Playfair Display',Georgia,serif;
+      --sans:'DM Sans',sans-serif;
+    }
+    body{font-family:var(--sans);background:var(--paper);color:var(--ink);}
+    nav{display:flex;align-items:center;justify-content:space-between;padding:20px 48px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--paper);z-index:100;}
+    .nav-logo{font-family:var(--serif);font-size:21px;display:flex;align-items:center;gap:7px;text-decoration:none;color:var(--ink);}
+    .logo-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);}
+    .nav-links{display:flex;align-items:center;gap:20px;}
+    .nav-links a{font-size:13px;color:var(--muted);text-decoration:none;}
+    .nav-links a:hover{color:var(--ink);}
+    .btn-solid{background:var(--ink);color:var(--paper);padding:8px 18px;border-radius:100px;font-size:13px;font-weight:500;text-decoration:none;}
+
+    .hero{max-width:900px;margin:0 auto;padding:72px 48px 48px;}
+    .eyebrow{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:8px;margin-bottom:20px;}
+    .eyebrow-line{flex:0 0 26px;height:1px;background:var(--muted);}
+    .hero h1{font-family:var(--serif);font-size:clamp(36px,5vw,56px);font-weight:400;line-height:1.1;margin-bottom:16px;}
+    .hero p{font-size:16px;color:var(--muted);line-height:1.7;max-width:560px;}
+
+    .stats-row{display:flex;gap:2px;max-width:900px;margin:0 auto 56px;padding:0 48px;}
+    .stat{flex:1;background:#fff;border:1px solid var(--border);padding:20px 24px;border-radius:12px;}
+    .stat-num{font-family:var(--serif);font-size:32px;margin-bottom:4px;}
+    .stat-lbl{font-size:12px;color:var(--muted);}
+
+    .sources-body{max-width:900px;margin:0 auto;padding:0 48px 80px;}
+    .category{margin-bottom:48px;}
+    .cat-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+    .cat-icon{font-size:18px;}
+    .cat-name{font-family:var(--serif);font-size:22px;font-weight:400;}
+    .cat-count{font-size:12px;color:var(--muted);background:var(--cream);padding:3px 10px;border-radius:100px;}
+    .source-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px;}
+    .source-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 16px;transition:all .15s;}
+    .source-card:hover{border-color:var(--accent);box-shadow:0 2px 12px rgba(43,79,255,.1);}
+    .source-name{font-size:13px;font-weight:500;margin-bottom:3px;}
+    .source-type{font-size:11px;color:var(--muted);}
+
+    .cta{background:var(--ink);border-radius:20px;padding:48px;margin:0 48px 80px;max-width:900px;margin-left:auto;margin-right:auto;text-align:center;}
+    .cta h2{font-family:var(--serif);font-size:32px;font-weight:400;color:#fff;margin-bottom:10px;}
+    .cta p{font-size:14px;color:rgba(255,255,255,.6);margin-bottom:28px;}
+    .btn-accent{background:var(--accent);color:#fff;padding:12px 28px;border-radius:100px;font-size:14px;font-weight:500;text-decoration:none;display:inline-block;}
+
+    footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--muted);}
+    .footer-logo{font-family:var(--serif);font-size:16px;color:var(--ink);}
+    footer a{color:var(--muted);text-decoration:none;}
+
+    @media(max-width:640px){
+      nav{padding:16px 20px;}
+      .hero,.sources-body,.stats-row{padding-left:20px;padding-right:20px;}
+      .cta{margin:0 20px 60px;}
+      .source-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));}
+      footer{padding:20px;flex-direction:column;gap:10px;text-align:center;}
+    }
+  </style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="/"><span class="logo-dot"></span> Briefly</a>
+  <div class="nav-links">
+    <a href="/digest.html">Daily digest</a>
+    <a href="/compare.html">Compare</a>
+    <a class="btn-solid" href="/">Get started free</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="eyebrow"><span class="eyebrow-line"></span> Our sources</div>
+  <h1>80+ trusted sources,<br>zero noise.</h1>
+  <p>Briefly monitors the outlets journalists, founders, and investors actually read — then filters for what's relevant to you specifically.</p>
+</div>
+
+<div class="stats-row">
+  <div class="stat"><div class="stat-num">80+</div><div class="stat-lbl">sources monitored daily</div></div>
+  <div class="stat"><div class="stat-num">16</div><div class="stat-lbl">topic categories</div></div>
+  <div class="stat"><div class="stat-num">5</div><div class="stat-lbl">stories per brief</div></div>
+  <div class="stat"><div class="stat-num">48h</div><div class="stat-lbl">max article age</div></div>
+</div>
+
+<div class="sources-body">
+
+  <div class="category">
+    <div class="cat-header"><span class="cat-icon">⚡</span><div class="cat-name">AI & Machine Learning</div><span class="cat-count">5 sources</span></div>
+    <div class="source-grid">
+      <div class="source-card"><div class="source-name">TechCrunch AI</div><div class="source-type">Tech news</div></div>
+      <div class="source-card"><div class="source-name">The Verge</div><div class="source-type">Tech & AI</div></div>
+      <div class="source-card"><div class="source-name">MIT Tech Review</div><div class="source-type">Research</div></div>
+      <div class="source-card"><div class="source-name">VentureBeat</div><div class="source-type">AI industry</div></div>
+      <div class="source-card"><div class="source-name">Wired</div><div class="source-type">Tech culture</div></div>
+    </div>
+  </div>
+
+  <div class="category">
+    <div class="cat-header"><span class="cat-icon">🚀</span><div class="cat-name">Startups</div><span class="cat-count">4 sources</span></div>
+    <div class="source-grid">
+      <div class="source-card"><div class="source-name">TechCrunch</div><div class="source-type">Startup news</div></div>
+      <div class="source-card"><div class="source-name">VentureBeat</div><div class="source-type">Entrepreneur</div></div>
+      <div class="source-card"><div class="source-name">Wired</div><div class="source-type">Business</div></div>
+      <div class="source-card"><div class="source-name">Entrepreneur</div><div class="source-type">Founder advice</div></div>
+    </div>
+  </div>
+
+  <div class="category">
+    <div class="cat-header"><span class="cat-icon">💰</span><div class="cat-name">Venture Capital</div><span class="cat-count">3 sources</span></div>
+    <div class="source-grid">
+      <div class="source-card"><div class="source-name">TechCrunch</div><div class="source-type">VC deals</div></div>
+      <div class="source-card"><div class="source-name">Crunchbase</div><div class="source-type">Funding data</div></div>
+      <div class="source-card"><div class="source-name">StrictlyVC</div><div class="source-type">VC newsletter</div></div>
+    </div>
+  </div>
+
+  <div class="category">
+    <div class="cat-header"><span class="cat-icon">📈</span><div class="cat-name">Finance & Macro</div><span class="cat-count">6 sources</span></div>
+    <div class="source-grid">
+      <div class="source-card"><div class="source-name">Reuters</div><div class="source-type">Business wire</div></div>
+      <div class="source-card"><div class="source-name">CNBC</div><div class="source-type">Markets</div></div>
+      <div class="source-card"><div class="source-name">Wall Street Journal</div><div class="source-type">Finance</div></div>
+      <div class="source-card"><div class="source-name">Financial Times</div><div class="source-type">Global finance</div></div>
+      <div class="source-card"><div class="source-name">Bloomberg</div><div class="source-type">Markets</div></div>
+      <div class="source-card"><div class="source-name">Fortune</div><div class="source-type">Business</div></div>
+    </div>
+  </div>
+
+  <div class="category">
+    <div class="cat-header"><span class="cat-icon">💻</span><div class="cat-name">Tech Industry</div><span class="cat-count">5 sources</span></div>
+    <div class="source-grid">
+      <div class="source-card"><div class="source-name">TechCrunch</div><div class="source-type">Tech news</div></div>
+      <div class="source-card"><div class="source-name">The Verge</div><div class="source-type">Consumer tech</div></div>
+      <div class="source-card"><div class="source-name">Ars Technica</div><div class="source-type">Deep dives</div></div>
+      <div class="source-card"><div class="source-name">Wired</div><div class="source-type">Tech culture</div></div>
+      <div class="source-card"><div class="source-name">VentureBeat</div><div class="source-type">Enterprise tech</div></div>
+    </div>
+  </div>
+
+  <div class="category">
+    <div class="cat-header"><span class="cat-icon">🌱</span><div class="cat-name">Climate & Energy</div><span class="cat-count">5 sources</span></div>
+    <div class="source-grid">
+      <div class="source-card"><div class="source-name">Reuters</div><div class="source-type">Environment</div></div>
+      <div class="source-card"><div class="source-name">Inside Climate News</div><div class="source-type">Climate</div></div>
+      <div class="source-card"><div class="source-name">The Guardian</div><div class="source-type">Environment</div></div>
+      <div class="source-card"><div class="source-name">BBC Science</div><div class="source-type">Environment</div></div>
+      <div class="source-card"><div class="source-name">Yale e360</div><div class="source-type">Analysis</div></div>
+    </div>
+  </div>
+
+  <div class="category">
+    <div class="cat-header"><span class="cat-icon">🧬</span><div class="cat-name">Biotech & Health</div><span class="cat-count">5 sources</span></div>
+    <div class="source-grid">
+      <div class="source-card"><div class="source-name">STAT News</div><div class="source-type">Biotech</div></div>
+      <div class="source-card"><div class="source-name">Reuters Health</div><div class="source-type">Health wire</div></div>
+      <div class="source-card"><div class="source-name">Fierce Biotech</div><div class="source-type">Industry</div></div>
+      <div class="source-card"><div class="source-name">Nature</div><div class="source-type">Research</div></div>
+      <div class="source-card"><div class="source-name">Science Daily</div><div class="source-type">Research</div></div>
+    </div>
+  </div>
+
+  <div class="category">
+    <div class="cat-header"><span class="cat-icon">🏛️</span><div class="cat-name">Policy & Regulation</div><span class="cat-count">4 sources</span></div>
+    <div class="source-grid">
+      <div class="source-card"><div class="source-name">Reuters</div><div class="source-type">Politics wire</div></div>
+      <div class="source-card"><div class="source-name">Politico</div><div class="source-type">Policy</div></div>
+      <div class="source-card"><div class="source-name">The Hill</div><div class="source-type">Politics</div></div>
+      <div class="source-card"><div class="source-name">The Guardian</div><div class="source-type">Politics</div></div>
+    </div>
+  </div>
+
+  <div class="category">
+    <div class="cat-header"><span class="cat-icon">🔗</span><div class="cat-name">Crypto & Web3</div><span class="cat-count">4 sources</span></div>
+    <div class="source-grid">
+      <div class="source-card"><div class="source-name">CoinTelegraph</div><div class="source-type">Crypto news</div></div>
+      <div class="source-card"><div class="source-name">CoinDesk</div><div class="source-type">Crypto markets</div></div>
+      <div class="source-card"><div class="source-name">Decrypt</div><div class="source-type">Web3</div></div>
+      <div class="source-card"><div class="source-name">TechCrunch</div><div class="source-type">Crypto</div></div>
+    </div>
+  </div>
+
+  <div class="category">
+    <div class="cat-header"><span class="cat-icon">🌍</span><div class="cat-name">World Affairs</div><span class="cat-count">6 sources</span></div>
+    <div class="source-grid">
+      <div class="source-card"><div class="source-name">Reuters World</div><div class="source-type">Global wire</div></div>
+      <div class="source-card"><div class="source-name">BBC World</div><div class="source-type">International</div></div>
+      <div class="source-card"><div class="source-name">The Guardian</div><div class="source-type">World news</div></div>
+      <div class="source-card"><div class="source-name">New York Times</div><div class="source-type">World</div></div>
+      <div class="source-card"><div class="source-name">NPR</div><div class="source-type">International</div></div>
+      <div class="source-card"><div class="source-name">Foreign Policy</div><div class="source-type">Geopolitics</div></div>
+    </div>
+  </div>
+
+  <div class="category">
+    <div class="cat-header"><span class="cat-icon">🔭</span><div class="cat-name">Space & Science</div><span class="cat-count">5 sources</span></div>
+    <div class="source-grid">
+      <div class="source-card"><div class="source-name">NASA</div><div class="source-type">Space</div></div>
+      <div class="source-card"><div class="source-name">Science Daily</div><div class="source-type">Research</div></div>
+      <div class="source-card"><div class="source-name">Space.com</div><div class="source-type">Space news</div></div>
+      <div class="source-card"><div class="source-name">New Scientist</div><div class="source-type">Science</div></div>
+      <div class="source-card"><div class="source-name">Reuters Science</div><div class="source-type">Research wire</div></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="cta">
+  <h2>Get the signal, not the noise.</h2>
+  <p>Free personalized brief delivered every morning. Takes 2 minutes to set up.</p>
+  <a class="btn-accent" href="/">Start my free brief →</a>
+</div>
+
+<footer>
+  <div class="footer-logo">Briefly</div>
+  <div style="display:flex;gap:20px;"><a href="/">Home</a><a href="/digest.html">Digest</a><a href="/compare.html">Compare</a><a href="mailto:hello@readbriefly.com">Contact</a></div>
+  <div>© 2026 Briefly · readbriefly.com</div>
+</footer>
+</body>
+</html>

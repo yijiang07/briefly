@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Archive — Briefly</title>
+  <meta name="description" content="Browse past Briefly daily digests by topic and date. AI, startups, finance, climate, biotech, and more.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='18' cy='16' r='10' stroke='%23111' stroke-width='2.5' fill='none'/><ellipse cx='18' cy='16' rx='4.5' ry='10' stroke='%23111' stroke-width='2.5' fill='none'/><line x1='8' y1='16' x2='28' y2='16' stroke='%23111' stroke-width='2.5'/><path d='M9.5 10 Q18 6.5 26.5 10' stroke='%233657F5' stroke-width='2.8' fill='none' stroke-linecap='round'/><path d='M9.5 22 Q18 25.5 26.5 22' stroke='%233657F5' stroke-width='2.8' fill='none' stroke-linecap='round'/></svg>">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --ink:#0f0e0c;--paper:#f5f2eb;--cream:#ede9df;
+      --accent:#2b4fff;--accent-light:#dce3ff;--muted:#7a7670;
+      --border:rgba(15,14,12,0.12);
+      --serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',sans-serif;
+    }
+    body{font-family:var(--sans);background:var(--paper);color:var(--ink);}
+    nav{display:flex;align-items:center;justify-content:space-between;padding:20px 48px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--paper);z-index:100;}
+    .nav-logo{font-family:var(--serif);font-size:21px;display:flex;align-items:center;gap:7px;text-decoration:none;color:var(--ink);}
+    .logo-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);}
+    .nav-links{display:flex;align-items:center;gap:20px;}
+    .nav-links a{font-size:13px;color:var(--muted);text-decoration:none;}
+    .nav-links a:hover{color:var(--ink);}
+    .btn-solid{background:var(--ink);color:var(--paper);padding:8px 18px;border-radius:100px;font-size:13px;font-weight:500;text-decoration:none;}
+
+    .hero{max-width:900px;margin:0 auto;padding:72px 48px 40px;}
+    .eyebrow{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:8px;margin-bottom:20px;}
+    .eyebrow-line{flex:0 0 26px;height:1px;background:var(--muted);}
+    .hero h1{font-family:var(--serif);font-size:clamp(36px,5vw,52px);font-weight:400;line-height:1.1;margin-bottom:16px;}
+    .hero p{font-size:16px;color:var(--muted);line-height:1.7;}
+
+    .filters{max-width:900px;margin:0 auto;padding:0 48px 32px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+    .filter-label{font-size:12px;color:var(--muted);margin-right:4px;}
+    .ftab{padding:6px 14px;border-radius:100px;border:1px solid var(--border);font-size:12px;cursor:pointer;background:var(--paper);transition:all .15s;}
+    .ftab:hover{border-color:var(--accent);color:var(--accent);}
+    .ftab.on{background:var(--accent);color:#fff;border-color:var(--accent);}
+
+    .archive-body{max-width:900px;margin:0 auto;padding:0 48px 80px;}
+    .archive-list{display:flex;flex-direction:column;gap:12px;}
+    .archive-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:22px 26px;cursor:pointer;transition:box-shadow .15s;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;}
+    .archive-card:hover{box-shadow:0 2px 16px rgba(0,0,0,.07);}
+    .archive-left{}
+    .archive-date{font-family:var(--serif);font-size:18px;margin-bottom:8px;}
+    .archive-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;}
+    .tag{font-size:10px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:100px;background:var(--accent-light);color:var(--accent);}
+    .archive-preview{font-size:13px;color:var(--muted);line-height:1.5;}
+    .archive-right{font-size:12px;color:var(--muted);white-space:nowrap;padding-top:4px;}
+
+    .empty{text-align:center;padding:60px 20px;color:var(--muted);}
+    .empty p{font-size:14px;line-height:1.6;}
+    .empty-icon{font-size:32px;margin-bottom:12px;}
+
+    .cta-inline{background:var(--cream);border-radius:14px;padding:28px;text-align:center;margin-top:32px;}
+    .cta-inline h3{font-family:var(--serif);font-size:22px;font-weight:400;margin-bottom:8px;}
+    .cta-inline p{font-size:13px;color:var(--muted);margin-bottom:16px;}
+    .btn-accent{background:var(--accent);color:#fff;padding:10px 22px;border-radius:100px;font-size:13px;font-weight:500;text-decoration:none;display:inline-block;}
+
+    footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--muted);}
+    .footer-logo{font-family:var(--serif);font-size:16px;color:var(--ink);}
+    footer a{color:var(--muted);text-decoration:none;}
+
+    @media(max-width:640px){
+      nav{padding:16px 20px;}
+      .hero,.filters,.archive-body{padding-left:20px;padding-right:20px;}
+      .archive-card{flex-direction:column;}
+      footer{padding:20px;flex-direction:column;gap:10px;text-align:center;}
+    }
+  </style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="/"><span class="logo-dot"></span> Briefly</a>
+  <div class="nav-links">
+    <a href="/digest.html">Daily digest</a>
+    <a href="/sample.html">Sample brief</a>
+    <a class="btn-solid" href="/">Get started free</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="eyebrow"><span class="eyebrow-line"></span> Archive</div>
+  <h1>Past digests,<br>searchable by topic.</h1>
+  <p>Browse what was happening in AI, startups, finance, and more on any given day.</p>
+</div>
+
+<div class="filters">
+  <span class="filter-label">Filter:</span>
+  <div class="ftab on" onclick="filterTopic(this,'all')">All topics</div>
+  <div class="ftab" onclick="filterTopic(this,'AI')">⚡ AI</div>
+  <div class="ftab" onclick="filterTopic(this,'Startups')">🚀 Startups</div>
+  <div class="ftab" onclick="filterTopic(this,'Finance')">📈 Finance</div>
+  <div class="ftab" onclick="filterTopic(this,'Climate')">🌱 Climate</div>
+  <div class="ftab" onclick="filterTopic(this,'Biotech')">🧬 Biotech</div>
+  <div class="ftab" onclick="filterTopic(this,'World')">🌍 World</div>
+</div>
+
+<div class="archive-body">
+  <div class="archive-list" id="archive-list"></div>
+  <div class="cta-inline">
+    <h3>Get this delivered daily.</h3>
+    <p>Sign up free and get a personalized brief built around your topics every morning.</p>
+    <a class="btn-accent" href="/">Get my free brief →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Briefly</div>
+  <div style="display:flex;gap:20px;"><a href="/">Home</a><a href="/digest.html">Digest</a><a href="/sources.html">Sources</a><a href="mailto:hello@readbriefly.com">Contact</a></div>
+  <div>© 2026 Briefly · readbriefly.com</div>
+</footer>
+
+<script>
+// Sample archive data — in future this could be loaded from Supabase
+const ARCHIVE = [
+  { date: 'Monday, June 1', topics: ['AI','Startups','Finance'], preview: 'Anthropic EU limits · YC S25 infrastructure shift · Fed rate signal · AI benchmark ceiling' },
+  { date: 'Sunday, May 31', topics: ['AI','Startups','World'], preview: 'OpenAI enterprise partnerships · Senate AI hearing · Global tech regulation roundup' },
+  { date: 'Saturday, May 30', topics: ['Finance','Biotech','Climate'], preview: 'Treasury yields climb · FDA CRISPR approval · Solar deployment record · EPA methane rules' },
+  { date: 'Friday, May 29', topics: ['AI','VC','Finance'], preview: 'Sequoia new fund · Series A valuations drop · AI infrastructure funding hits $8B · Green bonds' },
+  { date: 'Thursday, May 28', topics: ['Tech','World','Startups'], preview: 'Apple WWDC preview · OpenAI IPO signals · Global supply chain shifts · YC application surge' },
+  { date: 'Wednesday, May 27', topics: ['AI','Climate','Finance'], preview: 'AlphaFold 3 drug interactions · IEA solar record · Battery cost drop · Carbon border tax' },
+  { date: 'Tuesday, May 26', topics: ['Biotech','Policy','World'], preview: 'NIH AI guidelines · EU pharma reform · WHO pandemic treaty · Global health funding shifts' },
+  { date: 'Monday, May 25', topics: ['Finance','Startups','Tech'], preview: 'Q1 VC funding data · Inflation surprise · Big tech earnings preview · Fintech consolidation' },
+];
+
+let activeFilter = 'all';
+
+function filterTopic(tab, topic) {
+  activeFilter = topic;
+  document.querySelectorAll('.ftab').forEach(t => t.classList.remove('on'));
+  tab.classList.add('on');
+  renderArchive();
+}
+
+function renderArchive() {
+  const list = document.getElementById('archive-list');
+  const filtered = activeFilter === 'all'
+    ? ARCHIVE
+    : ARCHIVE.filter(item => item.topics.some(t => t.toLowerCase().includes(activeFilter.toLowerCase())));
+
+  if (filtered.length === 0) {
+    list.innerHTML = '<div class="empty"><div class="empty-icon">📭</div><p>No digests found for this topic yet.<br>Check back soon — new briefs are added daily.</p></div>';
+    return;
+  }
+
+  list.innerHTML = filtered.map(item => `
+    <div class="archive-card">
+      <div class="archive-left">
+        <div class="archive-date">${item.date}</div>
+        <div class="archive-tags">${item.topics.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+        <div class="archive-preview">${item.preview}</div>
+      </div>
+      <div class="archive-right">View digest →</div>
+    </div>
+  `).join('');
+}
+
+renderArchive();
+</script>
+</body>
+</html>

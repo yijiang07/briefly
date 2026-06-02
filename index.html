@@ -12,7 +12,6 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Briefly — All Signal, No Scroll">
   <meta name="twitter:description" content="Your personalized morning news brief. 5 stories, why they matter, in your inbox by 7am.">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -265,6 +264,8 @@
     <div class="nav-logo" onclick="showPage('landing')"><span class="logo-dot"></span> Briefly</div>
     <div class="nav-right">
       <a href="/digest.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:8px 4px;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Daily digest</a>
+      <a href="/sample.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:8px 4px;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Sample</a>
+      <a href="/compare.html" style="font-size:13px;color:var(--muted);text-decoration:none;padding:8px 4px;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Compare</a>
       <button class="btn-ghost" onclick="showPage('login')">Log in</button>
       <button class="btn-solid" onclick="showPage('signup')">Get started free</button>
     </div>
@@ -337,9 +338,13 @@
 
   <footer>
     <div class="footer-logo">Briefly</div>
-    <div style="display:flex;gap:20px;align-items:center;">
+    <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;">
+      <a href="/digest.html" style="color:var(--muted);text-decoration:none;">Digest</a>
+      <a href="/sample.html" style="color:var(--muted);text-decoration:none;">Sample</a>
+      <a href="/compare.html" style="color:var(--muted);text-decoration:none;">Compare</a>
+      <a href="/sources.html" style="color:var(--muted);text-decoration:none;">Sources</a>
+      <a href="/archive.html" style="color:var(--muted);text-decoration:none;">Archive</a>
       <a href="mailto:hello@readbriefly.com" style="color:var(--muted);text-decoration:none;">Contact</a>
-      <a href="#" onclick="showPage('signup');return false;" style="color:var(--muted);text-decoration:none;">Sign up free</a>
     </div>
     <div>© 2026 Briefly · readbriefly.com</div>
   </footer>
@@ -444,7 +449,7 @@
   <nav>
     <div class="nav-logo" onclick="showPage('landing')"><span class="logo-dot"></span> Briefly</div>
     <div class="nav-right">
-      <button class="btn-ghost" onclick="doSignOut()">Sign out</button>
+      <button class="btn-ghost" onclick="showPage('landing'); showToast('Signed out')">Sign out</button>
     </div>
   </nav>
   <div class="dash-layout">
@@ -528,7 +533,6 @@
 <script>
 const SUPABASE_URL = 'https://zesuoeedskxmrtfvpigc.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inplc3VvZWVkc2t4bXJ0ZnZwaWdjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAxNjU1MjIsImV4cCI6MjA5NTc0MTUyMn0.p6UHsDoIVA6jvXct0VdfbHSxf09JQ-Gj-z-22LMMzRY';
-const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // ── STATE ──
 const TOPICS = [
@@ -678,25 +682,13 @@ async function suSubmit() {
   state.prefsCustom = [...state.suCustom];
   state.prefsFreq = state.suFreq || 'daily';
 
-  // Create Supabase Auth account
-  const { data: authData, error: authError } = await sb.auth.signUp({
-    email: state.user.email,
-    password: document.getElementById('su-pass').value,
-  });
-  if (authError && authError.message !== 'User already registered') {
-    showToast(authError.message);
-    btn.disabled = false; btn.textContent = 'Create my account →';
-    return;
-  }
-
   try {
     await fetch(`${SUPABASE_URL}/rest/v1/signups`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'apikey': SUPABASE_ANON_KEY,
-        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-        'Prefer': 'return=minimal',
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
       },
       body: JSON.stringify({
         email: state.user.email,
@@ -730,22 +722,11 @@ async function suSubmit() {
 }
 
 // ── LOGIN ──
-async function doLogin() {
-  const email    = document.getElementById('li-email').value.trim();
-  const password = document.getElementById('li-pass').value;
-  if (!email || !password) { showToast('Please enter your email and password'); return; }
-  const btn = document.querySelector('#page-login .btn-full');
-  btn.disabled = true; btn.textContent = 'Signing in...';
-  const { data, error } = await sb.auth.signInWithPassword({ email, password });
-  if (error) {
-    showToast('Wrong email or password');
-    btn.disabled = false; btn.textContent = 'Sign in';
-    return;
-  }
-  state.user = { email: data.user.email, name: data.user.email.split('@')[0] };
-  await loadUserData();
+function doLogin() {
+  const e = document.getElementById('li-email').value;
+  if (!e) { showToast('Please enter your email'); return; }
+  state.user = { email: e, name: e.split('@')[0] };
   showPage('dashboard');
-  btn.disabled = false; btn.textContent = 'Sign in';
 }
 
 // ── DASHBOARD ──
@@ -843,71 +824,13 @@ function prefsFreq(el, val) {
   el.classList.add('on');
 }
 
-async function saveTopics() {
-  if (!state.user) return;
-  await sbPatch({ topics: [...state.prefsTopics].join(', ') });
-  showSaved('topics-saved'); showToast('Topics saved ✓');
-}
-async function saveCustom() {
-  if (!state.user) return;
-  await sbPatch({ custom_tracking: state.prefsCustom.join(', ') });
-  showSaved('custom-saved'); showToast('Tracking saved ✓');
-}
-async function saveFreq() {
-  if (!state.user) return;
-  await sbPatch({ frequency: state.prefsFreq });
-  showSaved('freq-saved'); showToast('Frequency saved ✓');
-}
-async function sbPatch(body) {
-  await fetch(`${SUPABASE_URL}/rest/v1/signups?email=eq.${encodeURIComponent(state.user.email)}`, {
-    method: 'PATCH',
-    headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'Prefer': 'return=minimal' },
-    body: JSON.stringify(body),
-  });
-}
+function saveTopics() { showSaved('topics-saved'); showToast('Topics saved'); }
+function saveCustom() { showSaved('custom-saved'); showToast('Tracking list saved'); }
+function saveFreq() { showSaved('freq-saved'); showToast('Frequency saved'); }
 function showSaved(id) {
   const el = document.getElementById(id);
   el.classList.add('visible');
   setTimeout(() => el.classList.remove('visible'), 2500);
-}
-
-// ── LOAD USER DATA ──
-async function loadUserData() {
-  if (!state.user) return;
-  try {
-    const res  = await fetch(`${SUPABASE_URL}/rest/v1/signups?email=eq.${encodeURIComponent(state.user.email)}&select=*`, {
-      headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
-    });
-    const data = await res.json();
-    if (data && data[0]) {
-      const row = data[0];
-      state.prefsTopics = new Set((row.topics || '').split(',').map(t => t.trim()).filter(Boolean));
-      state.prefsCustom = (row.custom_tracking || '').split(',').map(t => t.trim()).filter(Boolean);
-      state.prefsFreq   = row.frequency || 'daily';
-    }
-  } catch(e) { console.error('loadUserData:', e); }
-}
-
-// ── SESSION CHECK (auto-login on page load) ──
-async function checkSession() {
-  const { data: { session } } = await sb.auth.getSession();
-  if (session) {
-    state.user = { email: session.user.email, name: session.user.email.split('@')[0] };
-    await loadUserData();
-    showPage('dashboard');
-  }
-}
-checkSession();
-
-// ── SIGN OUT ──
-async function doSignOut() {
-  await sb.auth.signOut();
-  state.user = null;
-  state.prefsTopics = new Set();
-  state.prefsCustom = [];
-  state.prefsFreq   = 'daily';
-  showPage('landing');
-  showToast('Signed out');
 }
 
 // ── SUBSCRIBER COUNT ──

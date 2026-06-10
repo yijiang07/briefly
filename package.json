@@ -1,0 +1,13 @@
+{
+  "name": "briefly",
+  "version": "1.0.0",
+  "description": "Your personalized morning news brief",
+  "private": true,
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Static site - no build required'"
+  },
+  "dependencies": {
+    "@vercel/speed-insights": "^1.0.14"
+  }
+}
